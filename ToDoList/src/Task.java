@@ -70,7 +70,7 @@ public class Task {
         this.day = day;
     }
 
-    @java.lang.Override
+    @Override
     public java.lang.String toString() {
         return "Task{" +
                 "TaskHeader='" + TaskHeader + '\'' +
