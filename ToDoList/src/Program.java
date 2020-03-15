@@ -1,33 +1,50 @@
+
+import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Program {
+public class Program{
     public static Filemanager filemanager;
     private static Scanner reader = new Scanner(System.in);
     public static void main(String[] args) {
-        char choice;
+        char choice, choicecreate;
         String file = "Tasks/filetask.bin";
         List<Task> tasks = new ArrayList<Task>();
+        List<Task> TasksfromFile;
         filemanager.createDirectory("Tasks");
         if(!Files.exists(Paths.get(file))){
             filemanager.createFile(file);
         }
         tasks.add(new Task("hi","dkas",2020,1,1));
+        tasks.add(new Task("h1","d2s",2020,1,1));
         do {
             choice = menu();
+
             switch(choice){
                 case 'c':
+                    choicecreate = createMenu();
+                    switch(choicecreate){
+                        case 'm':
+                            break;
+                        case 'o':
+                            break;
+                        default:
+                            System.out.println("Falscher Buchstabe");
+                            break;
+                    }
                     break;
                 case 'l':
                     break;
                 case'b':
                     System.out.println("Programm wird beendet");
                     filemanager.serializeTaskS(file, tasks);
+
                     break;
                 default:
+                    System.out.println("Falscher Buchstabe");
                     break;
             }
 
@@ -39,6 +56,13 @@ public class Program {
         System.out.println("Aufgabe erstellen.............c");
         System.out.println("List aller offenen Aufgaben...l");
         System.out.println("Beenden.......................b");
+        choice = reader.next().toLowerCase().charAt(0);
+        return choice;
+    }
+    public static char createMenu(){
+        char choice;
+        System.out.println("Aufgabe erstellen ohne zeitliches Ende.............m");
+        System.out.println("Aufgabe erstellen mit zeitliches Ende..............o");
         choice = reader.next().toLowerCase().charAt(0);
         return choice;
     }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Filemanager {
+public class Filemanager{
 
     public static void createDirectory(String direction){
         try{
@@ -29,16 +29,11 @@ public class Filemanager {
         }
     }
     public static void serializeTask(String filename, Task task){
-        // erweiterte Version von try - mit ()-Klammern
-        // innerhalb der Klammern werden Instanzen für Ressourcen angegeben, diese müssen unbedingt möglichst rasch
-        // wieder freigegeben werden
         try(FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream oos = new ObjectOutputStream(fos))
         {
             oos.writeObject(task);
         }
-        // hier werden die obigen Ressourcen wieder freigegeben
-        // es wird automatisch der finally-Block eingefügt
         catch(IOException e){
             System.out.println("Serialisierung hat nicht funktioniert.");
         }
@@ -47,8 +42,6 @@ public class Filemanager {
         try(FileInputStream fis = new FileInputStream(filename);
             ObjectInputStream ois = new ObjectInputStream(fis))
         {
-            // Rückgabetyp von readObject ist immer die Basisklasse Object
-            // diese muss noch in den gewünschen Typ (hier Person) konvertiert werden
             return (Task)ois.readObject();
         }
         catch(IOException e){
@@ -63,9 +56,7 @@ public class Filemanager {
         try(FileOutputStream fos = new FileOutputStream(filename);
             ObjectOutputStream oos = new ObjectOutputStream(fos))
         {
-            for(Task p : task){
-                oos.writeObject(p);
-            }
+                oos.writeObject(task);
         }
         catch(IOException e){
             System.out.println("Serialisierung hat nicht funktioniert.");
