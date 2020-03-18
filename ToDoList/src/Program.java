@@ -20,8 +20,7 @@ public class Program{
         if(!Files.exists(Paths.get(file))){
             filemanager.createFile(file);
         }
-        tasks.add(new Task("hi","dkas",2020,1,1));
-        tasks.add(new Task("h1","d2s",2020,1,1));
+        filemanager.serializeTaskS(file, tasks);
         do {
             choice = menu();
 
@@ -60,11 +59,14 @@ public class Program{
                     }
                     break;
                 case 'l':
+                    TasksfromFile = filemanager.deserializeTaskS(file);
+                    System.out.println(TasksfromFile);
                     choicecreate = listMenu();
                     switch(choicecreate){
                         case 'a':
                             break;
                         case 'l':
+                            tasks.remove(1);
                             break;
                     }
 
